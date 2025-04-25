@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic Grid Puzzle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+    }
+    .clues {
+      margin-bottom: 20px;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .grid {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    .grid th,
+    .grid td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: center;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.2em;
+    }
+    .grid th {
+      background: #f0f0f0;
+      cursor: default;
+    }
+    .grid td.blank:hover {
+      background: #eef;
+    }
+    .grid td.marked {
+      background: #cfc;
+      color: green;
+    }
+    .grid td.crossed {
+      background: #fcc;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logic Grid Puzzle</h1>
+  <div class="clues">
+    <h2>Clues</h2>
+    <ol>
+      <li>Alice does not live in the Red house.</li>
+      <li>The person with the Cat lives in the Yellow house.</li>
+      <li>Bob owns the Hamster.</li>
+      <li>The Green house is next to the Blue house.</li>
+      <li>David does not own the Bird.</li>
+    </ol>
+  </div>
+  <div class="grid-container">
+    <!-- Person vs House -->
+    <div>
+      <h3>Person vs House</h3>
+      <table class="grid" id="grid-person-house">
+        <thead>
+          <tr><th></th><th>Red</th><th>Blue</th><th>Green</th><th>Yellow</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Alice</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Bob</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Carol</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>David</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Person vs Pet -->
+    <div>
+      <h3>Person vs Pet</h3>
+      <table class="grid" id="grid-person-pet">
+        <thead>
+          <tr><th></th><th>Dog</th><th>Cat</th><th>Hamster</th><th>Bird</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Alice</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Bob</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Carol</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>David</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- House vs Pet -->
+    <div>
+      <h3>House vs Pet</h3>
+      <table class="grid" id="grid-house-pet">
+        <thead>
+          <tr><th></th><th>Dog</th><th>Cat</th><th>Hamster</th><th>Bird</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Red</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Blue</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Green</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+          <tr><th>Yellow</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Add click handlers to all grid cells
+    document.querySelectorAll('.grid td').forEach(cell => {
+      cell.addEventListener('click', () => {
+        if (cell.classList.contains('blank')) {
+          cell.classList.remove('blank');
+          cell.classList.add('marked');
+          cell.textContent = '✔';
+        } else if (cell.classList.contains('marked')) {
+          cell.classList.remove('marked');
+          cell.classList.add('crossed');
+          cell.textContent = '✕';
+        } else if (cell.classList.contains('crossed')) {
+          cell.classList.remove('crossed');
+          cell.classList.add('blank');
+          cell.textContent = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
